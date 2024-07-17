@@ -45,36 +45,40 @@ def main():
         help="Save TLDR summaries to a text file (default: TLDR.txt)",
     )
 
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     parse_args(args)
 
 
-def parse_args(cmd_arg: str) -> None:
-    if cmd_arg.type == "pdf":
-        process_pdf(
-            cmd_arg.inputfilename,
-            cmd_arg.words_per_sentence,
-            cmd_arg.sentences_per_page,
-            cmd_arg.output_file,
-        )
+def parse_args(cmd_arg: argparse.Namespace) -> None:
     elif cmd_arg.type == "txt":
-        process_text_file(
-            cmd_arg.inputfilename,
-            cmd_arg.words_per_sentence,
-            cmd_arg.sentences_per_page,
-            cmd_arg.output_file,
-        )
     elif cmd_arg.type == "url":
-        process_web_request(
-            cmd_arg.inputfilename,
-            cmd_arg.words_per_sentence,
-            cmd_arg.sentences_per_page,
-            cmd_arg.output_file,
-        )
 
-    else:
-        print("Invalid type specified. Use '-t <type>' to process a PDF or text file.")
+    match cmd_arg.type:
+        case "pdf":
+            process_pdf(
+                cmd_arg.inputfilename,
+                cmd_arg.words_per_sentence,
+                cmd_arg.sentences_per_page,
+                cmd_arg.output_file,
+            )
+        case "txt":
+            process_text_file(
+                cmd_arg.inputfilename,
+                cmd_arg.words_per_sentence,
+                cmd_arg.sentences_per_page,
+                cmd_arg.output_file,
+            )
+        case "url":
+            process_web_request(
+                cmd_arg.inputfilename,
+                cmd_arg.words_per_sentence,
+                cmd_arg.sentences_per_page,
+                cmd_arg.output_file,
+            )
+
+        case  ;
+            print("Invalid type specified. Use '-t <type>' to process a PDF or text file.")
 
 
 if __name__ == "__main__":
