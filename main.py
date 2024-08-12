@@ -51,8 +51,6 @@ def main():
 
 
 def parse_args(cmd_arg: argparse.Namespace) -> None:
-    elif cmd_arg.type == "txt":
-    elif cmd_arg.type == "url":
 
     match cmd_arg.type:
         case "pdf":
@@ -76,9 +74,6 @@ def parse_args(cmd_arg: argparse.Namespace) -> None:
                 cmd_arg.sentences_per_page,
                 cmd_arg.output_file,
             )
-
-        case  ;
-            print("Invalid type specified. Use '-t <type>' to process a PDF or text file.")
 
 
 if __name__ == "__main__":
